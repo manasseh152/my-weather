@@ -3,25 +3,51 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+	/* light theme */
+	--foreground-light-rgb: 0, 0, 0;
+	--background-light-start-rgb: 214, 219, 220;
+	--background-light-end-rgb: 255, 255, 255;
+
+	/* dark theme */
+	--foreground-dark-rgb: 255, 255, 255;
+	--background-dark-start-rgb: 0, 0, 0;
+	--background-dark-end-rgb: 0, 0, 0;
+
+	/* default theme */
+	--foreground-rgb: var(--foreground-light-rgb);
+	--background-start-rgb: var(--background-light-start-rgb);
+	--background-end-rgb: var(--background-light-end-rgb);
 }
 
+/* if the color preference is dark, use the dark theme */
 @media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+	:root {
+		--foreground-rgb: var(--foreground-dark-rgb);
+		--background-start-rgb: var(--background-dark-start-rgb);
+		--background-end-rgb: var(--background-dark-end-rgb);
+	}
 }
 
+/* if the body has a data-theme attribute, use that theme */
+body[data-theme="dark"] {
+	--foreground-rgb: var(--foreground-dark-rgb);
+	--background-start-rgb: var(--background-dark-start-rgb);
+	--background-end-rgb: var(--background-dark-end-rgb);
+}
+
+body[data-theme="light"] {
+	--foreground-rgb: var(--foreground-light-rgb);
+	--background-start-rgb: var(--background-light-start-rgb);
+	--background-end-rgb: var(--background-light-end-rgb);
+}
+
+/* set the background and foreground colors */
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+	color: rgb(var(--foreground-rgb));
+	background: linear-gradient(
+			to bottom,
+			transparent,
+			rgb(var(--background-end-rgb))
+		)
+		rgb(var(--background-start-rgb));
 }
